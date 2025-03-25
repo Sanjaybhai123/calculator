@@ -1,0 +1,555 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calc By Jisuzen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Calculator</h1>
+        <nav class="top-nav">
+            <a href="#home">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#contact">Contact</a> |
+            <a href="#privacy">Privacy Policy</a>
+        </nav>
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search Calculators...">
+            <button id="darkModeToggle">🌙</button>
+        </div>
+    </header>
+
+    <nav class="category-nav">
+        <button onclick="scrollToSection('math')">Math</button>
+        <button onclick="scrollToSection('financial')">Financial</button>
+        <button onclick="scrollToSection('fitness')">Fitness</button>
+        <button onclick="scrollToSection('conversion')">Conversion</button>
+        <button onclick="scrollToSection('other')">Other</button>
+    </nav>
+
+    <main>
+        <!-- Math Calculators -->
+        <div id="math" class="category">
+            <h2 class="category-title">Math Calculators</h2>
+            <section class="calculator" id="basicCalc">
+                <h3>Basic Calculator</h3>
+                <input type="number" id="num1" placeholder="First Number">
+                <input type="number" id="num2" placeholder="Second Number">
+                <div class="button-group">
+                    <button onclick="add()">+</button>
+                    <button onclick="subtract()">−</button>
+                    <button onclick="multiply()">×</button>
+                    <button onclick="divide()">÷</button>
+                </div>
+                <p>Result: <span id="basicResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="basicSteps"></p>
+                </details>
+            </section>
+
+            <section class="calculator">
+                <h3>Percentage Calculator</h3>
+                <input type="number" id="total" placeholder="Total Value">
+                <input type="number" id="percent" placeholder="Percentage">
+                <button onclick="calculatePercentage()">Calculate</button>
+                <p>Result: <span id="percentResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="percentSteps"></p>
+                </details>
+            </section>
+
+            <section class="calculator">
+                <h3>Fraction Calculator</h3>
+                <input type="number" id="num1Frac" placeholder="Numerator 1">
+                <input type="number" id="den1Frac" placeholder="Denominator 1">
+                <input type="number" id="num2Frac" placeholder="Numerator 2">
+                <input type="number" id="den2Frac" placeholder="Denominator 2">
+                <button onclick="addFractions()">Add</button>
+                <p>Result: <span id="fractionResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="fractionSteps"></p>
+                </details>
+            </section>
+        </div>
+
+        <!-- Financial Calculators -->
+        <div id="financial" class="category">
+            <h2 class="category-title">Financial Calculators</h2>
+            <section class="calculator">
+                <h3>Loan Calculator</h3>
+                <input type="number" id="principal" placeholder="Loan Amount">
+                <input type="number" id="rate" placeholder="Interest Rate (%)">
+                <input type="number" id="tenure" placeholder="Tenure (months)">
+                <button onclick="calculateEMI()">Calculate</button>
+                <p>Monthly EMI: <span id="emiResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="emiSteps"></p>
+                </details>
+            </section>
+
+            <section class="calculator">
+                <h3>Savings Calculator</h3>
+                <input type="number" id="initial" placeholder="Initial Amount">
+                <input type="number" id="savingsRate" placeholder="Interest Rate (%)">
+                <input type="number" id="years" placeholder="Years">
+                <button onclick="calculateSavings()">Calculate</button>
+                <p>Future Value: <span id="savingsResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="savingsSteps"></p>
+                </details>
+            </section>
+        </div>
+
+        <!-- Fitness Calculators -->
+        <div id="fitness" class="category">
+            <h2 class="category-title">Fitness Calculators</h2>
+            <section class="calculator">
+                <h3>BMI Calculator</h3>
+                <input type="number" id="weight" placeholder="Weight (kg)">
+                <input type="number" id="height" placeholder="Height (m)">
+                <button onclick="calculateBMI()">Calculate</button>
+                <p>Result: <span id="bmiResult">0</span></p>
+                <canvas id="bmiChart" width="200" height="20"></canvas>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="bmiSteps"></p>
+                </details>
+            </section>
+
+            <section class="calculator">
+                <h3>Calorie Calculator</h3>
+                <input type="number" id="calWeight" placeholder="Weight (kg)">
+                <input type="number" id="calHeight" placeholder="Height (cm)">
+                <input type="number" id="calAge" placeholder="Age">
+                <select id="calGender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <button onclick="calculateCalories()">Calculate</button>
+                <p>BMR: <span id="calorieResult">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="calorieSteps"></p>
+                </details>
+            </section>
+        </div>
+
+        <!-- Conversion Calculators -->
+        <div id="conversion" class="category">
+            <h2 class="category-title">Conversion Calculators</h2>
+            <section class="calculator">
+                <h3>Length Converter</h3>
+                <input type="number" id="meters" placeholder="Length in Meters">
+                <div class="button-group">
+                    <button onclick="convertToKm()">To Km</button>
+                    <button onclick="convertToCm()">To Cm</button>
+                </div>
+                <p>Result: <span id="lengthResult">0</span></p>
+            </section>
+
+            <section class="calculator">
+                <h3>Temperature Converter</h3>
+                <input type="number" id="celsius" placeholder="Temp in Celsius">
+                <button onclick="convertToFahrenheit()">To Fahrenheit</button>
+                <p>Result: <span id="tempResult">0</span></p>
+            </section>
+        </div>
+
+        <!-- Other Calculators -->
+        <div id="other" class="category">
+            <h2 class="category-title">Other Calculators</h2>
+            <section class="calculator">
+                <h3>Tip Calculator</h3>
+                <input type="number" id="bill" placeholder="Bill Amount">
+                <input type="number" id="tipPercent" placeholder="Tip Percentage">
+                <button onclick="calculateTip()">Calculate</button>
+                <p>Tip: <span id="tipResult">0</span> | Total: <span id="totalBill">0</span></p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="tipSteps"></p>
+                </details>
+            </section>
+
+            <section class="calculator">
+                <h3>Age Calculator</h3>
+                <input type="date" id="birthdate">
+                <button onclick="calculateAge()">Calculate</button>
+                <p>Age: <span id="ageResult">0</span> years</p>
+                <details>
+                    <summary>Steps</summary>
+                    <p id="ageSteps"></p>
+                </details>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Calculator By Jisuzen. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>3e<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+    color: #e0e0e0;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* 🔥 Header Scroll Fix */
+header {
+    background: rgba(10, 10, 25, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    text-align: center;
+    position: relative;  /* Sticky hata diya */
+    top: auto;
+    z-index: 10;
+}
+
+/* 🔥 Search Bar & Navigation Scroll Fix */
+.controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* 🔥 Category Navigation (Sticky Effect Remove) */
+.category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    background: rgba(10, 10, 25, 0.8);
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;  /* Sticky Remove */
+    top: auto;
+    z-index: 9;
+}
+
+/* 🔥 Button Styling */
+.category-nav button {
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.category-nav button:hover {
+    transform: scale(1.1);
+}
+
+/* 🔥 Search Bar */
+#search {
+    padding: 10px;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    width: 200px;
+}
+
+/* 🔥 Dark Mode Toggle */
+#darkModeToggle {
+    background: #ff00ff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#darkModeToggle:hover {
+    transform: rotate(180deg);
+}
+
+/* 🔥 Main Layout */
+main {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* 🔥 Calculator Sections */
+.calculator {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.calculator:hover {
+    border-color: #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+/* 🔥 Inputs & Select */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    font-family: 'Orbitron', sans-serif;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #ff00ff;
+    outline: none;
+}
+
+/* 🔥 Buttons */
+button {
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+/* 🔥 Typography */
+h1 {
+    font-size: 3em;
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+h2 {
+    font-size: 2em;
+    color: #00ffff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+h3 {
+    color: #e0e0e0;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* 🔥 Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #999;
+    font-size: 0.9em;
+}
+
+/* 🔥 Mobile Responsive Fix */
+@media (max-width: 600px) {
+    .category-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .calculator {
+        margin: 10px 0;
+    }
+    .button-group {
+        flex-direction: column;
+    }
+    input {
+        font-size: 1rem;
+    }
+}</style><script>// Category Navigation
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+// Dark Mode Toggle
+document.getElementById("darkModeToggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
+
+// Search Functionality
+document.getElementById("search").addEventListener("input", (e) => {
+    let query = e.target.value.toLowerCase();
+    document.querySelectorAll(".calculator").forEach(calc => {
+        let title = calc.querySelector("h3").innerText.toLowerCase();
+        calc.style.display = title.includes(query) ? "block" : "none";
+    });
+});
+
+// 1. Basic Calculator
+function add() {
+    let num1 = Number(document.getElementById("num1").value);
+    let num2 = Number(document.getElementById("num2").value);
+    let result = num1 + num2;
+    document.getElementById("basicResult").innerText = result;
+    document.getElementById("basicSteps").innerText = `${num1} + ${num2} = ${result}`;
+}
+
+function subtract() {
+    let num1 = Number(document.getElementById("num1").value);
+    let num2 = Number(document.getElementById("num2").value);
+    let result = num1 - num2;
+    document.getElementById("basicResult").innerText = result;
+    document.getElementById("basicSteps").innerText = `${num1} - ${num2} = ${result}`;
+}
+
+function multiply() {
+    let num1 = Number(document.getElementById("num1").value);
+    let num2 = Number(document.getElementById("num2").value);
+    let result = num1 * num2;
+    document.getElementById("basicResult").innerText = result;
+    document.getElementById("basicSteps").innerText = `${num1} × ${num2} = ${result}`;
+}
+
+function divide() {
+    let num1 = Number(document.getElementById("num1").value);
+    let num2 = Number(document.getElementById("num2").value);
+    let result = num2 !== 0 ? (num1 / num2).toFixed(2) : "Error";
+    document.getElementById("basicResult").innerText = result;
+    document.getElementById("basicSteps").innerText = num2 !== 0 ? `${num1} ÷ ${num2} = ${result}` : "Cannot divide by zero";
+}
+
+// 2. Percentage Calculator
+function calculatePercentage() {
+    let total = Number(document.getElementById("total").value);
+    let percent = Number(document.getElementById("percent").value);
+    let result = (total * percent) / 100;
+    document.getElementById("percentResult").innerText = result.toFixed(2);
+    document.getElementById("percentSteps").innerText = `${percent}% of ${total} = (${total} × ${percent}) ÷ 100 = ${result.toFixed(2)}`;
+}
+
+// 3. Fraction Calculator
+function addFractions() {
+    let num1 = Number(document.getElementById("num1Frac").value);
+    let den1 = Number(document.getElementById("den1Frac").value);
+    let num2 = Number(document.getElementById("num2Frac").value);
+    let den2 = Number(document.getElementById("den2Frac").value);
+    let resultNum = (num1 * den2) + (num2 * den1);
+    let resultDen = den1 * den2;
+    document.getElementById("fractionResult").innerText = `${resultNum}/${resultDen}`;
+    document.getElementById("fractionSteps").innerText = `${num1}/${den1} + ${num2}/${den2} = (${num1}×${den2} + ${num2}×${den1})/(${den1}×${den2}) = ${resultNum}/${resultDen}`;
+}
+
+// 4. Loan EMI Calculator
+function calculateEMI() {
+    let principal = Number(document.getElementById("principal").value);
+    let rate = Number(document.getElementById("rate").value) / 100 / 12;
+    let tenure = Number(document.getElementById("tenure").value);
+    let emi = (principal * rate * Math.pow(1 + rate, tenure)) / (Math.pow(1 + rate, tenure) - 1);
+    document.getElementById("emiResult").innerText = emi.toFixed(2);
+    document.getElementById("emiSteps").innerText = `EMI = [${principal} × ${rate.toFixed(4)} × (1 + ${rate.toFixed(4)})^${tenure}] / [(1 + ${rate.toFixed(4)})^${tenure} - 1] = ${emi.toFixed(2)}`;
+}
+
+// 5. Savings Calculator
+function calculateSavings() {
+    let initial = Number(document.getElementById("initial").value);
+    let rate = Number(document.getElementById("savingsRate").value) / 100;
+    let years = Number(document.getElementById("years").value);
+    let result = initial * Math.pow(1 + rate, years);
+    document.getElementById("savingsResult").innerText = result.toFixed(2);
+    document.getElementById("savingsSteps").innerText = `Future Value = ${initial} × (1 + ${rate})^${years} = ${result.toFixed(2)}`;
+}
+
+// 6. BMI Calculator
+function calculateBMI() {
+    let weight = Number(document.getElementById("weight").value);
+    let height = Number(document.getElementById("height").value);
+    let result = weight / (height * height);
+    document.getElementById("bmiResult").innerText = result.toFixed(2);
+    document.getElementById("bmiSteps").innerText = `BMI = ${weight} ÷ (${height} × ${height}) = ${result.toFixed(2)}`;
+    let ctx = document.getElementById("bmiChart").getContext("2d");
+    ctx.clearRect(0, 0, 200, 20);
+    ctx.fillStyle = "#ff00ff";
+    ctx.fillRect(0, 0, Math.min(result, 40) * 5, 20);
+}
+
+// 7. Calorie Calculator (BMR)
+function calculateCalories() {
+    let weight = Number(document.getElementById("calWeight").value);
+    let height = Number(document.getElementById("calHeight").value);
+    let age = Number(document.getElementById("calAge").value);
+    let gender = document.getElementById("calGender").value;
+    let bmr = gender === "male" 
+        ? 10 * weight + 6.25 * height - 5 * age + 5 
+        : 10 * weight + 6.25 * height - 5 * age - 161;
+    document.getElementById("calorieResult").innerText = bmr.toFixed(2);
+    document.getElementById("calorieSteps").innerText = gender === "male" 
+        ? `BMR = 10 × ${weight} + 6.25 × ${height} - 5 × ${age} + 5 = ${bmr.toFixed(2)}`
+        : `BMR = 10 × ${weight} + 6.25 × ${height} - 5 × ${age} - 161 = ${bmr.toFixed(2)}`;
+}
+
+// 8. Length Converter
+function convertToKm() {
+    let meters = Number(document.getElementById("meters").value);
+    let result = (meters / 1000).toFixed(2);
+    document.getElementById("lengthResult").innerText = result + " km";
+}
+
+function convertToCm() {
+    let meters = Number(document.getElementById("meters").value);
+    let result = (meters * 100).toFixed(2);
+    document.getElementById("lengthResult").innerText = result + " cm";
+}
+
+// 9. Temperature Converter
+function convertToFahrenheit() {
+    let celsius = Number(document.getElementById("celsius").value);
+    let result = (celsius * 9/5 + 32).toFixed(2);
+    document.getElementById("tempResult").innerText = result + " °F";
+}
+
+// 10. Tip Calculator
+function calculateTip() {
+    let bill = Number(document.getElementById("bill").value);
+    let tipPercent = Number(document.getElementById("tipPercent").value);
+    let tip = (bill * tipPercent) / 100;
+    let total = bill + tip;
+    document.getElementById("tipResult").innerText = tip.toFixed(2);
+    document.getElementById("totalBill").innerText = total.toFixed(2);
+    document.getElementById("tipSteps").innerText = `Tip = ${bill} × ${tipPercent}% = ${tip.toFixed(2)}, Total = ${bill} + ${tip.toFixed(2)} = ${total.toFixed(2)}`;
+}
+
+// 11. Age Calculator
+function calculateAge() {
+    let birthdate = new Date(document.getElementById("birthdate").value);
+    let today = new Date();
+    let age = today.getFullYear() - birthdate.getFullYear();
+    let monthDiff = today.getMonth() - birthdate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+        age--;
+    }
+    document.getElementById("ageResult").innerText = age;
+    document.getElementById("ageSteps").innerText = `Age = ${today.getFullYear()} - ${birthdate.getFullYear()} = ${age} (adjusted for months/days)`;
+}</script>
